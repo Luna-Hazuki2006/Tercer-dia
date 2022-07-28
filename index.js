@@ -37,10 +37,16 @@ if (formElement) {
         if (inputElement.value !== "") {
             // buscar el select
             const selectElement = document.getElementById("taskPriority")
+
+            const inputDate = document.getElementById("taskDate")
+
+            const fecha = new Date(inputDate.value)
+            const fecha_real = fecha.getDate() + "/" + fecha.getMonth() + "/" + fecha.getFullYear()
             
             // tengo los valoes del input y del select
             console.log( inputElement.value )
             console.log( selectElement.value )
+            console.log( inputDate.value );
 
             // agregar nuevo li a la lista
             const taskListElement = document.getElementById("task-list")
@@ -60,6 +66,9 @@ if (formElement) {
                 style="word-break: keep-all;">
                 <div class="mx-2 text-start" style="flex: 1;">
                     <div class="fw-bold">${inputElement.value}</div>
+                    <div>${fecha_real}</div>
+                </div>
+                    
                 </div>
                 <span class="badge bg-primary rounded-pill mx-1">${selectElement.value}</span>
                 <button onclick="deleteTask(${mayorId})" type="button" class="btn btn-outline-danger btn-sm">
