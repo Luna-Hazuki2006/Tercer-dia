@@ -3,11 +3,11 @@ console.log("hola mundo")
 
 const boton = document.getElementById("boton-borrar")
 
-const cantidad = document.getElementById("label-cantidad")
+let cantidad = document.getElementById("label-cantidad")
 
 const dar_numeros = () => {
-    const taskListElement = document.getElementById("task-list")
-    cantidad.textContent = "Listado de tareas: " + ((cantidad.value == undefined) ? 0 : cantidad.value)
+    let taskListElement = document.getElementById("task-list")
+    cantidad.textContent = "Listado de tareas: " + taskListElement.children.length
 }
 
 dar_numeros()
@@ -25,7 +25,6 @@ const deleteTask = (id) => {
     if (taskListElement.children.length == 0) {
         boton.style.display = "none"
     } else boton.style.display = "block"
-
     dar_numeros()
 }
 
@@ -41,16 +40,18 @@ if (btnElement) {
 
 if (boton) {
     boton.addEventListener("click", () => {
-        console.log("Eliminando tareas");
-        const taskListElement = document.getElementById("task-list")
-        while (taskListElement.children.length > 0) {
-            for (let i = 0; i < taskListElement.children.length; i++) {
-                let element = taskListElement.children[i];
-                taskListElement.removeChild(element)
-            }   
+        if (confirm("¿Está seguro que quiere eliminar todas las tareas?") === true) {
+            console.log("Eliminando tareas");
+            const taskListElement = document.getElementById("task-list")
+            while (taskListElement.children.length > 0) {
+                for (let i = 0; i < taskListElement.children.length; i++) {
+                    let element = taskListElement.children[i];
+                    taskListElement.removeChild(element)
+                }   
+            }
+            console.log(taskListElement.children.length);
+            console.log("se eliminaron")            
         }
-        console.log(taskListElement.children.length);
-        console.log("se eliminaron")
     })
     dar_numeros()
 }
