@@ -49,9 +49,11 @@ if (boton) {
                     taskListElement.removeChild(element)
                 }   
             }
+            dar_numeros()
+            boton.style.display = "none"
             console.log(taskListElement.children.length);
             console.log("se eliminaron")            
-        }
+        } else boton.style.display = "block"
     })
     dar_numeros()
 }
