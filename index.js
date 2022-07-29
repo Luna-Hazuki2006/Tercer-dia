@@ -3,6 +3,15 @@ console.log("hola mundo")
 
 const boton = document.getElementById("boton-borrar")
 
+const cantidad = document.getElementById("label-cantidad")
+
+const dar_numeros = () => {
+    const taskListElement = document.getElementById("task-list")
+    cantidad.textContent = "Listado de tareas: " + ((cantidad.value == undefined) ? 0 : cantidad.value)
+}
+
+dar_numeros()
+
 const deleteTask = (id) => {
     console.log("eliminando....", id)
     // buscamos etiqueta ol
@@ -16,6 +25,8 @@ const deleteTask = (id) => {
     if (taskListElement.children.length == 0) {
         boton.style.display = "none"
     } else boton.style.display = "block"
+
+    dar_numeros()
 }
 
 // codigo de ejemplo
@@ -31,8 +42,17 @@ if (btnElement) {
 if (boton) {
     boton.addEventListener("click", () => {
         console.log("Eliminando tareas");
-        
+        const taskListElement = document.getElementById("task-list")
+        while (taskListElement.children.length > 0) {
+            for (let i = 0; i < taskListElement.children.length; i++) {
+                let element = taskListElement.children[i];
+                taskListElement.removeChild(element)
+            }   
+        }
+        console.log(taskListElement.children.length);
+        console.log("se eliminaron")
     })
+    dar_numeros()
 }
 
 // agarrar el elemento form
@@ -46,12 +66,14 @@ if (formElement) {
        
         // extraer los datos nombre de la tarea y prioridad
         const inputElement = document.getElementById("taskName")
+
+        const inputDate = document.getElementById("taskDate")
+
+        console.log(inputDate.value);
         
-        if (inputElement.value !== "") {
+        if (inputElement.value !== "" && inputDate.value !== "") {
             // buscar el select
             const selectElement = document.getElementById("taskPriority")
-
-            const inputDate = document.getElementById("taskDate")
             let fondo = 'background-color: '
             switch (selectElement.value) {
                 case "1":
@@ -116,6 +138,8 @@ if (formElement) {
             } else {
                 boton.style.display = "none"
             }
+
+            dar_numeros()
 
         } else {
             alert(" Debes especificar una tarea prro >:v ")
