@@ -1,6 +1,8 @@
 // aqui va todo el código
 console.log("hola mundo")
 
+const boton = document.getElementById("boton-borrar")
+
 const deleteTask = (id) => {
     console.log("eliminando....", id)
     // buscamos etiqueta ol
@@ -10,6 +12,10 @@ const deleteTask = (id) => {
 
     // eliminamos etiqueta li
     taskListElement.removeChild(elementToDelete)
+
+    if (taskListElement.children.length == 0) {
+        boton.style.display = "none"
+    } else boton.style.display = "block"
 }
 
 // codigo de ejemplo
@@ -19,6 +25,13 @@ if (btnElement) {
     btnElement.addEventListener("click", function() {
         console.log("eliminando tarea")
         // codigo
+    })
+}
+
+if (boton) {
+    boton.addEventListener("click", () => {
+        console.log("Eliminando tareas");
+        
     })
 }
 
@@ -39,9 +52,26 @@ if (formElement) {
             const selectElement = document.getElementById("taskPriority")
 
             const inputDate = document.getElementById("taskDate")
+            let fondo = 'background-color: '
+            switch (selectElement.value) {
+                case "1":
+                case "2":
+                    fondo += 'blue; color: white;'
+                    break;
+                case "3":
+                case "4":
+                    fondo += 'yellow;'
+                    break;
+                case "5":
+                    fondo += 'red; color: white;'
+                default:
+                    break;
+            }
 
             const fecha = new Date(inputDate.value)
-            const fecha_real = fecha.getDate() + "/" + fecha.getMonth() + "/" + fecha.getFullYear()
+            const dia = fecha.getDate() + 1
+            const mes = fecha.getMonth() + 1
+            const fecha_real = `${(dia <= 9) ? "0" + dia : dia}/${(mes <= 9) ? "0" + mes : mes}/${fecha.getFullYear()}`
             
             // tengo los valoes del input y del select
             console.log( inputElement.value )
@@ -63,7 +93,7 @@ if (formElement) {
 
             taskListElement.innerHTML += `
             <li id="${mayorId}" class="list-group-item d-flex justify-content-between align-items-center"
-                style="word-break: keep-all;">
+                style="word-break: keep-all; ${fondo}">
                 <div class="mx-2 text-start" style="flex: 1;">
                     <div class="fw-bold">${inputElement.value}</div>
                     <div>${fecha_real}</div>
@@ -80,6 +110,12 @@ if (formElement) {
                 </button>
             </li>
             `
+
+            if (taskListElement.children.length > 0) {
+                boton.style.display = "block"
+            } else {
+                boton.style.display = "none"
+            }
 
         } else {
             alert(" Debes especificar una tarea prro >:v ")
