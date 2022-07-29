@@ -42,6 +42,8 @@ if (boton) {
     boton.addEventListener("click", () => {
         if (confirm("¿Está seguro que quiere eliminar todas las tareas?") === true) {
             console.log("Eliminando tareas");
+            const audio = new Audio("assets/Man falls down stairs meme.mp3")
+            audio.play()
             const taskListElement = document.getElementById("task-list")
             while (taskListElement.children.length > 0) {
                 for (let i = 0; i < taskListElement.children.length; i++) {
