@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
     <script src="index.js" defer></script>
     <title>Document</title>
 </head>
 <body>
     <p>You are gonna see in the console a sudoku</p>
-    <form action="index.py">
-        <button type="submit">Python</button>
-    </form>
+    <button py-click="current_time()" id="get-time" class="py-button">Get current time</button>
+    <p id="current-time"></p>
+    <py-script src="index.py"></py-script>
 </body>
 </html>
