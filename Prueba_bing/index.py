@@ -6,6 +6,7 @@ import datetime
 def current_time(): 
     texto = Element('current-time')
     texto.element.innerText = datetime.datetime.now()
+    print("hola mundo")
 
 def print_board(board):
     for i in range(len(board)):
